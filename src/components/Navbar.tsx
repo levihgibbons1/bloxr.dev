@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
 
-const Navbar = ({ minimal = false }: { minimal?: boolean }) => {
+const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const [atTop, setAtTop] = useState(true);
   const lastScrollY = useRef(0);
@@ -39,19 +39,17 @@ const Navbar = ({ minimal = false }: { minimal?: boolean }) => {
         <span className="text-[#4F8EF7] text-[28px] font-bold">.dev</span>
       </a>
 
-      {!minimal && (
-        <div className="hidden md:flex items-center space-x-[40px]">
-          {[
-            { label: 'How It Works', href: '#how-it-works' },
-            { label: 'Features', href: '#features' },
-            { label: 'Pricing', href: '#pricing' },
-          ].map((item) => (
-            <a key={item.label} href={item.href} className="text-white/50 hover:text-white text-[15px] font-medium transition-colors duration-200">
-              {item.label}
-            </a>
-          ))}
-        </div>
-      )}
+      <div className="hidden md:flex items-center space-x-[40px]">
+        {[
+          { label: 'How It Works', href: '/#how-it-works' },
+          { label: 'Features', href: '/#features' },
+          { label: 'Pricing', href: '/#pricing' },
+        ].map((item) => (
+          <a key={item.label} href={item.href} className="text-white/50 hover:text-white text-[15px] font-medium transition-colors duration-200">
+            {item.label}
+          </a>
+        ))}
+      </div>
 
       <a href="/waitlist" className="group relative rounded-full overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#4F8EF7] to-[#7B61FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

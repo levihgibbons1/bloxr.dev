@@ -99,7 +99,7 @@ const Waitlist = () => {
       <FloatingParticle delay={4} x="15%" y="75%" size={3} />
       <FloatingParticle delay={2} x="50%" y="35%" size={2} />
 
-      <Navbar minimal />
+      <Navbar />
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-[80px]">
         <div className="w-full max-w-[480px]">
@@ -139,24 +139,33 @@ const Waitlist = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-[32px] font-semibold text-white mb-3"
+                className="text-[32px] md:text-[40px] font-semibold text-white mb-4"
               >
-                You're on the list.
+                You've successfully joined the waitlist!
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-white/40 text-[16px] leading-relaxed mb-8 max-w-[380px] mx-auto"
+                className="text-white/40 text-[17px] leading-relaxed mb-4 max-w-[420px] mx-auto"
               >
                 We'll send you an invite when your spot is ready. Keep an eye on your inbox.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-white/25 text-[14px] mb-10 max-w-[380px] mx-auto"
+              >
+                In the meantime, follow us on social media for sneak peeks and updates.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
+                className="flex items-center justify-center gap-6"
               >
-                <Link to="/" className="text-white/30 hover:text-white/60 text-[14px] transition-colors">
+                <Link to="/" className="text-[#4F8EF7] hover:text-[#4F8EF7]/80 text-[15px] font-medium transition-colors">
                   Back to home
                 </Link>
               </motion.div>
@@ -210,20 +219,17 @@ const Waitlist = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="space-y-4"
               >
-                <div className="relative group">
-                  <div className="absolute -inset-[1px] bg-gradient-to-r from-[#4F8EF7]/20 via-transparent to-[#7B61FF]/20 rounded-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"></div>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (status === 'error') setStatus('idle');
-                    }}
-                    placeholder="you@example.com"
-                    className="relative w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-5 py-4 text-white text-[16px] placeholder:text-white/20 outline-none focus:border-[#4F8EF7]/30 transition-colors duration-200"
-                    autoFocus
-                  />
-                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  placeholder="you@example.com"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-5 py-4 text-white text-[16px] placeholder:text-white/20 outline-none focus:border-white/20 transition-colors duration-200"
+                  autoFocus
+                />
 
                 {status === 'error' && (
                   <motion.p
@@ -242,7 +248,7 @@ const Waitlist = () => {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {status === 'loading' ? 'Joining...' : 'Get Early Access'}
+                  {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
                 </motion.button>
               </motion.form>
 
