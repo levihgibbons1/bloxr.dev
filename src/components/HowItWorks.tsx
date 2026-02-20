@@ -40,7 +40,7 @@ const steps = [
   {
     number: '04',
     title: 'Start building',
-    description: 'Type what you want. Hit send. Watch code appear in your open Studio place in real time. Under 60 seconds from zero to building.',
+    description: 'Type what you want. Hit send. Watch code appear in your open Studio place in real time. Pick a game blueprint or start from scratch. Under 60 seconds from zero to building.',
     visual: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
         <path d="M14 34L20 28L26 32L34 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

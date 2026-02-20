@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 const features = [
   {
     title: 'Deep Roblox AI',
-    description: 'Not a generic chatbot. Claude with a comprehensive Roblox context layer -- every current API, every service, every Luau pattern. It knows the difference between deprecated Lua and current Luau syntax.',
+    description: 'Not a generic chatbot. An AI with a comprehensive Roblox context layer -- every current API, every service, every Luau pattern. It knows the difference between deprecated Lua and current Luau syntax.',
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <path d="M16 4V8M16 24V28M4 16H8M24 16H28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -26,6 +26,20 @@ const features = [
     ),
   },
   {
+    title: 'Game blueprint system',
+    description: 'Full game templates that give you a working foundation in seconds. Obby, tycoon, simulator, RPG. Each blueprint comes with pre-wired systems you can customize through prompts.',
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <rect x="4" y="6" width="24" height="20" rx="3" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M4 12H28" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M10 12V26" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="7" cy="9" r="1" fill="currentColor" opacity="0.4"/>
+        <rect x="14" y="16" width="8" height="3" rx="1" stroke="currentColor" strokeWidth="1.5" opacity="0.5"/>
+        <rect x="14" y="22" width="5" height="1" rx="0.5" fill="currentColor" opacity="0.3"/>
+      </svg>
+    ),
+  },
+  {
     title: 'Self-correcting',
     description: 'When generated code produces a Studio error, the plugin captures it and feeds it back to the AI automatically. The fix appears without you lifting a finger. Errors just disappear.',
     icon: (
@@ -37,20 +51,8 @@ const features = [
     ),
   },
   {
-    title: 'Client-server aware',
-    description: 'Never generates server code in a LocalScript. Understands DataStoreService, RemoteEvents, client-server architecture, and places every script in the correct Studio service automatically.',
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect x="4" y="4" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-        <rect x="18" y="4" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-        <rect x="11" y="18" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M9 14V18M23 14V22H21M16 18V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
     title: 'Conversation memory',
-    description: 'The AI remembers your entire session. Follow-up prompts work naturally. Say "now add a cooldown to that ability" and it knows exactly which ability you mean.',
+    description: 'The AI remembers your entire session. Follow-up prompts work naturally. Say "now add a cooldown to that ability" and it knows exactly which ability you mean. Pro users get unlimited history.',
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <path d="M8 10H24M8 16H20M8 22H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -59,8 +61,8 @@ const features = [
     ),
   },
   {
-    title: 'One-click components',
-    description: 'A curated marketplace of beautiful, functional UI components. Shop GUIs, health bars, leaderboards, notification systems. Each one arrives pre-wired and ready to use.',
+    title: 'UI component library',
+    description: 'A curated library of 100+ beautiful, functional UI components. Shop GUIs, health bars, leaderboards, notification systems. Each one arrives pre-wired and ready to use in your game.',
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <rect x="4" y="4" width="11" height="11" rx="2" stroke="currentColor" strokeWidth="1.5"/>

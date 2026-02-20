@@ -28,7 +28,8 @@ AI-powered Roblox development platform landing page with waitlist email collecti
 │       ├── HowItWorks.tsx  # 4-step connection flow with timeline
 │       ├── Features.tsx    # 6 feature cards with SVG icons, sticky layout
 │       ├── Marketplace.tsx # UI component categories with hover effects
-│       ├── Pricing.tsx     # 3 tiers (Free/Pro $12/Studio $29)
+│       ├── Pricing.tsx     # 3 tiers (Free $0/Pro $14/Studio $39)
+│       ├── Navbar.tsx      # Shared navigation bar component
 │       ├── CTA.tsx         # Final call-to-action
 │       ├── Waitlist.tsx    # Email waitlist signup page (/waitlist route)
 │       └── Footer.tsx      # Site footer with nav links
@@ -50,7 +51,7 @@ AI-powered Roblox development platform landing page with waitlist email collecti
 ## Design Decisions
 - No emojis anywhere in the UI
 - All icons are custom inline SVGs
-- PRD-accurate pricing: Free (10 prompts/day), Pro ($12/mo unlimited), Studio ($29/mo teams)
+- PRD-accurate pricing: Free ($0, 10 prompts/day), Pro ($14/mo unlimited, most popular), Studio ($39/mo teams)
 - PRD-accurate marketplace categories: Shop & Economy, Player Info, Notifications, Navigation
 - Custom CSS animations: float, pulse-glow, gradient-shift, grid background, noise overlay
 - Typing prompt animation in hero cycles through real PRD example prompts

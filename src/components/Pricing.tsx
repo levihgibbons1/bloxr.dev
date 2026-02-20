@@ -4,49 +4,52 @@ const plans = [
   {
     name: 'Free',
     price: '$0',
-    period: '',
-    description: 'Everything you need to try Bloxr and see if it fits how you build.',
+    period: '/mo',
+    description: 'Everything you need to start building with AI. No credit card required.',
     features: [
-      '10 AI prompts per day',
-      '20 basic UI components',
+      '10 prompts per day',
+      '5 UI components from basic library',
       '1 project',
       'Real-time Studio sync',
       '7-day conversation history',
-      'Auto error fix',
+      'Community support',
     ],
-    cta: 'Start Free',
+    cta: 'Get Started',
     highlighted: false,
   },
   {
     name: 'Pro',
-    price: '$12',
+    price: '$14',
     period: '/mo',
+    badge: 'Most Popular',
     description: 'For builders who have outgrown the free tier and want to ship faster.',
     features: [
-      'Unlimited AI prompts',
-      'Full component library (100+)',
+      'Unlimited prompts',
+      'Full UI component library (100+)',
       'Unlimited projects',
-      'Real-time Studio sync',
-      'Conversation history forever',
-      'Priority AI speed',
+      'Full game blueprint system',
+      'Unlimited conversation history',
+      'Priority AI response speed',
+      'Email support',
     ],
-    cta: 'Start Building',
+    cta: 'Upgrade to Pro',
     highlighted: true,
   },
   {
     name: 'Studio',
-    price: '$29',
+    price: '$39',
     period: '/mo',
-    description: 'For teams and studios that need to prototype fast and ship together.',
+    description: 'For teams and studios shipping games together at scale.',
     features: [
       'Everything in Pro',
       'Up to 5 team members',
-      'Early access to new components',
-      'Request custom UI components',
-      'Priority support',
-      'Shared project library',
+      'Shared projects',
+      '1 custom UI component request/mo',
+      'Early access to new blueprints',
+      'Priority support (24hr response)',
+      'Usage analytics dashboard',
     ],
-    cta: 'Contact Us',
+    cta: 'Go Studio',
     highlighted: false,
   },
 ];
@@ -93,10 +96,17 @@ const Pricing = () => {
               )}
 
               <div className="mb-6">
-                <h3 className="text-white text-[18px] font-semibold mb-4">{plan.name}</h3>
+                <div className="flex items-center gap-3 mb-4">
+                  <h3 className="text-white text-[18px] font-semibold">{plan.name}</h3>
+                  {plan.badge && (
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.05em] text-[#4F8EF7] bg-[#4F8EF7]/10 px-2.5 py-1 rounded-full">
+                      {plan.badge}
+                    </span>
+                  )}
+                </div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-white text-[44px] font-bold tracking-tight leading-none">{plan.price}</span>
-                  {plan.period && <span className="text-white/30 text-[16px]">{plan.period}</span>}
+                  <span className="text-white/30 text-[16px]">{plan.period}</span>
                 </div>
                 <p className="text-white/35 text-[15px] mt-3 leading-relaxed">{plan.description}</p>
               </div>
@@ -114,15 +124,16 @@ const Pricing = () => {
                 ))}
               </ul>
 
-              <button
-                className={`w-full rounded-xl py-[13px] text-[15px] font-semibold transition-all duration-200 active:scale-[0.97] ${
+              <a
+                href="/waitlist"
+                className={`block w-full text-center rounded-xl py-[13px] text-[15px] font-semibold transition-all duration-200 active:scale-[0.97] ${
                   plan.highlighted
                     ? 'bg-[#4F8EF7] text-white hover:bg-[#3D7BE5] shadow-[0_0_20px_rgba(79,142,247,0.15)]'
                     : 'bg-white/[0.06] text-white/70 hover:bg-white/[0.1] hover:text-white'
                 }`}
               >
                 {plan.cta}
-              </button>
+              </a>
             </motion.div>
           ))}
         </div>
