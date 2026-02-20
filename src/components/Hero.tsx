@@ -66,10 +66,13 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 text-[44px] md:text-[72px] leading-[1.1] tracking-[-2.5px] max-w-[780px] text-white"
+          className="mt-8 text-[44px] md:text-[72px] leading-[1.15] tracking-[-2px] max-w-[780px] pb-1 text-transparent bg-clip-text"
           style={{
             fontFamily: "'General Sans', sans-serif",
-            fontWeight: 700,
+            fontWeight: 600,
+            backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.45) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
         >
           Roblox development, reimagined through AI.
