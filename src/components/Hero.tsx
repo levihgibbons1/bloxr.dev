@@ -29,7 +29,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <div className="relative w-full min-h-screen bg-black overflow-hidden flex flex-col items-center">
+    <div className="relative w-full min-h-screen bg-black overflow-hidden flex flex-col items-center justify-center">
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -45,13 +45,13 @@ const Hero = () => {
 
       <Navbar />
 
-      <div className="relative z-10 flex flex-col items-center justify-start w-full px-6 pt-[220px] md:pt-[300px] pb-[120px] text-center">
+      <div className="relative z-10 flex flex-col items-center w-full px-6 text-center">
         
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center space-x-2.5 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 mb-12 backdrop-blur-sm"
+          className="flex items-center space-x-2.5 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-sm"
         >
           <div className="relative flex items-center justify-center w-2.5 h-2.5">
              <div className="absolute w-1.5 h-1.5 bg-[#4F8EF7] rounded-full shadow-[0_0_6px_#4F8EF7]"></div>
@@ -66,9 +66,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[44px] md:text-[72px] font-medium leading-[1.08] tracking-[-2px] max-w-[780px] text-transparent bg-clip-text"
+          className="text-[44px] md:text-[72px] font-bold leading-[1.08] tracking-[-2.5px] max-w-[780px] text-transparent bg-clip-text"
           style={{
-            backgroundImage: 'linear-gradient(144.5deg, #FFFFFF 28%, rgba(255, 255, 255, 0) 115%)'
+            backgroundImage: 'linear-gradient(160deg, #FFFFFF 40%, rgba(255, 255, 255, 0.35) 100%)'
           }}
         >
           Roblox development, reimagined through AI.
@@ -78,7 +78,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 text-[18px] font-normal text-white/70 max-w-[620px] leading-relaxed"
+          className="mt-6 text-[18px] font-normal text-white/60 max-w-[540px] leading-relaxed"
         >
           Describe what you want to build. Watch it appear in Roblox Studio in real time. No Lua required.
         </motion.p>
@@ -87,7 +87,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 mb-5"
+          className="mt-10 mb-4"
         >
           <button className="relative group rounded-full p-[0.6px] bg-gradient-to-b from-white to-white/50 overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-[#4F8EF7] blur-[4px]"></div>
