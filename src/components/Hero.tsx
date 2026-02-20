@@ -3,15 +3,15 @@ import { motion } from 'motion/react';
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-[120px] md:py-7 w-full">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-[120px] md:py-8 w-full">
       <div className="flex items-center">
-        <span className="text-white text-[28px] font-bold">Bloxr</span>
-        <span className="text-[#4F8EF7] text-[28px] font-bold">.dev</span>
+        <span className="text-white text-[32px] font-bold">Bloxr</span>
+        <span className="text-[#4F8EF7] text-[32px] font-bold">.dev</span>
       </div>
 
-      <div className="hidden md:flex items-center space-x-[40px]">
+      <div className="hidden md:flex items-center space-x-[44px]">
         {['How It Works', 'Features', 'Marketplace', 'Pricing'].map((item) => (
-          <a key={item} href="#" className="text-white/80 hover:text-white text-[16px] font-medium transition-colors">
+          <a key={item} href="#" className="text-white/80 hover:text-white text-[18px] font-medium transition-colors">
             {item}
           </a>
         ))}
@@ -19,8 +19,8 @@ const Navbar = () => {
 
       <button className="relative group rounded-full p-[0.6px] bg-white overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent opacity-50 blur-[2px]"></div>
-        <div className="relative bg-black rounded-full px-[36px] py-[14px] flex items-center justify-center">
-          <span className="text-white text-[16px] font-medium">Join Waitlist</span>
+        <div className="relative bg-black rounded-full px-[40px] py-[16px] flex items-center justify-center">
+          <span className="text-white text-[18px] font-medium">Join Waitlist</span>
         </div>
       </button>
     </nav>
@@ -51,12 +51,12 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center space-x-2.5 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 backdrop-blur-sm"
+          className="flex items-center space-x-3 bg-white/10 border border-white/20 rounded-full px-6 py-3 backdrop-blur-sm"
         >
-          <div className="relative flex items-center justify-center w-2.5 h-2.5">
-             <div className="absolute w-1.5 h-1.5 bg-[#4F8EF7] rounded-full shadow-[0_0_6px_#4F8EF7]"></div>
+          <div className="relative flex items-center justify-center w-3 h-3">
+             <div className="absolute w-2 h-2 bg-[#4F8EF7] rounded-full shadow-[0_0_6px_#4F8EF7]"></div>
           </div>
-          <div className="text-[15px] font-medium">
+          <div className="text-[17px] font-medium">
             <span className="text-white/60">Now in early access —</span>
             <span className="text-white ml-1">Start building for free</span>
           </div>
@@ -66,7 +66,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 text-[36px] md:text-[56px] font-medium leading-[1.1] tracking-[-1.5px] max-w-[680px] pb-1 text-transparent bg-clip-text"
+          className="mt-10 text-[48px] md:text-[80px] font-medium leading-[1.1] tracking-[-2px] max-w-[900px] pb-1 text-transparent bg-clip-text"
           style={{
             backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.45) 100%)',
             WebkitBackgroundClip: 'text',
@@ -80,7 +80,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 text-[18px] font-normal text-white/60 max-w-[540px] leading-relaxed"
+          className="mt-8 text-[20px] font-normal text-white/60 max-w-[600px] leading-relaxed"
         >
           Describe what you want to build. Watch it appear in Roblox Studio in real time. No Lua required.
         </motion.p>
@@ -89,12 +89,12 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8"
+          className="mt-10"
         >
           <button className="relative group rounded-full p-[0.6px] bg-gradient-to-b from-white to-white/50 overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-[#4F8EF7] blur-[4px]"></div>
-            <div className="relative bg-white rounded-full px-[40px] py-[16px] flex items-center justify-center transition-transform active:scale-95">
-              <span className="text-black text-[16px] font-semibold">Get Early Access</span>
+            <div className="relative bg-white rounded-full px-[48px] py-[18px] flex items-center justify-center transition-transform active:scale-95">
+              <span className="text-black text-[18px] font-semibold">Get Early Access</span>
             </div>
           </button>
         </motion.div>
@@ -103,7 +103,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-6 text-[14px] text-white/35"
+          className="mt-6 text-[16px] text-white/35"
         >
           Free to start · No credit card required · Works with Roblox Studio
         </motion.p>
