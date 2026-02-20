@@ -145,17 +145,17 @@ const TypingPrompt = () => {
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#4F8EF7]/20 to-transparent"></div>
 
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.05]">
-          <div className="flex items-center gap-2.5">
-            <div className="w-[18px] h-[18px] rounded-md bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                <path d="M5 1V9M1 5H9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+          <div className="flex items-center gap-2">
+            <div className="w-[20px] h-[20px] rounded-full bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center">
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="white"/>
               </svg>
             </div>
-            <span className="text-white/50 text-[13px] font-semibold tracking-wide">Bloxr Agent</span>
+            <span className="text-white/60 text-[13px] font-semibold">Bloxr Agent</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-[6px] h-[6px] rounded-full bg-[#10B981]"></div>
-            <span className="text-[#10B981]/70 text-[11px] font-medium">Studio Connected</span>
+            <div className="w-[5px] h-[5px] rounded-full bg-[#10B981] shadow-[0_0_6px_rgba(16,185,129,0.5)]"></div>
+            <span className="text-white/30 text-[11px] font-medium">Connected</span>
           </div>
         </div>
 
@@ -212,9 +212,9 @@ const TypingPrompt = () => {
                   transition={{ duration: 0.3 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="w-[22px] h-[22px] rounded-md bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center shrink-0 mt-0.5">
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M5 1V9M1 5H9" stroke="white" strokeWidth="1.2" strokeLinecap="round"/>
+                  <div className="w-[22px] h-[22px] rounded-full bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center shrink-0 mt-0.5">
+                    <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="white"/>
                     </svg>
                   </div>
                   <div className="flex-1">
