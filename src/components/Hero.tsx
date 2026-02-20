@@ -51,7 +51,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center space-x-2.5 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-sm"
+          className="flex items-center space-x-2.5 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 backdrop-blur-sm"
         >
           <div className="relative flex items-center justify-center w-2.5 h-2.5">
              <div className="absolute w-1.5 h-1.5 bg-[#4F8EF7] rounded-full shadow-[0_0_6px_#4F8EF7]"></div>
@@ -66,9 +66,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[44px] md:text-[72px] font-bold leading-[1.08] tracking-[-2.5px] max-w-[780px] text-transparent bg-clip-text"
+          className="mt-8 text-[44px] md:text-[72px] leading-[1.1] tracking-[-2.5px] max-w-[780px] text-white"
           style={{
-            backgroundImage: 'linear-gradient(160deg, #FFFFFF 40%, rgba(255, 255, 255, 0.35) 100%)'
+            fontFamily: "'General Sans', sans-serif",
+            fontWeight: 700,
           }}
         >
           Roblox development, reimagined through AI.
@@ -78,7 +79,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 text-[18px] font-normal text-white/60 max-w-[540px] leading-relaxed"
+          className="mt-8 text-[18px] font-normal text-white/60 max-w-[540px] leading-relaxed"
         >
           Describe what you want to build. Watch it appear in Roblox Studio in real time. No Lua required.
         </motion.p>
@@ -87,7 +88,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 mb-4"
+          className="mt-8"
         >
           <button className="relative group rounded-full p-[0.6px] bg-gradient-to-b from-white to-white/50 overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-[#4F8EF7] blur-[4px]"></div>
@@ -101,7 +102,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-[14px] text-white/35"
+          className="mt-6 text-[14px] text-white/35"
         >
           Free to start · No credit card required · Works with Roblox Studio
         </motion.p>
