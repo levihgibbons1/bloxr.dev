@@ -70,7 +70,7 @@ const TypingPrompt = () => {
   ];
   const [currentPrompt, setCurrentPrompt] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [phase, setPhase] = useState<'typing' | 'waiting' | 'responding' | 'done'>('typing');
+  const [phase, setPhase] = useState<'typing' | 'sent' | 'responding' | 'done' | 'clearing'>('typing');
   const [responseText, setResponseText] = useState('');
 
   const responses = [
@@ -90,16 +90,16 @@ const TypingPrompt = () => {
         }, 30 + Math.random() * 20);
         return () => clearTimeout(timeout);
       } else {
-        const timeout = setTimeout(() => setPhase('waiting'), 800);
+        const timeout = setTimeout(() => setPhase('sent'), 600);
         return () => clearTimeout(timeout);
       }
     }
 
-    if (phase === 'waiting') {
+    if (phase === 'sent') {
       const timeout = setTimeout(() => {
         setResponseText('');
         setPhase('responding');
-      }, 400);
+      }, 500);
       return () => clearTimeout(timeout);
     }
 
@@ -111,21 +111,28 @@ const TypingPrompt = () => {
         }, 15 + Math.random() * 10);
         return () => clearTimeout(timeout);
       } else {
-        const timeout = setTimeout(() => setPhase('done'), 2200);
+        const timeout = setTimeout(() => setPhase('done'), 1800);
         return () => clearTimeout(timeout);
       }
     }
 
     if (phase === 'done') {
+      const timeout = setTimeout(() => setPhase('clearing'), 400);
+      return () => clearTimeout(timeout);
+    }
+
+    if (phase === 'clearing') {
       const timeout = setTimeout(() => {
         setDisplayText('');
         setResponseText('');
         setCurrentPrompt((prev) => (prev + 1) % prompts.length);
         setPhase('typing');
-      }, 300);
+      }, 400);
       return () => clearTimeout(timeout);
     }
   }, [displayText, phase, currentPrompt, responseText]);
+
+  const showChat = phase !== 'typing' && phase !== 'clearing';
 
   return (
     <motion.div
@@ -153,69 +160,102 @@ const TypingPrompt = () => {
         </div>
 
         <AnimatePresence mode="wait">
-          {(phase === 'responding' || phase === 'done') && (
+          {!showChat ? (
             <motion.div
-              key={`response-${currentPrompt}`}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="px-5 py-4 border-b border-white/[0.04]"
+              key="input"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="px-5 py-4"
             >
-              <div className="flex items-start gap-3">
-                <div className="w-[20px] h-[20px] rounded-md bg-gradient-to-br from-[#4F8EF7]/20 to-[#7B61FF]/20 flex items-center justify-center shrink-0 mt-0.5">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M5 1V9M1 5H9" stroke="#4F8EF7" strokeWidth="1.2" strokeLinecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-white/50 text-[14px] leading-relaxed">
-                    {responseText}
-                    {phase === 'responding' && (
-                      <span className="inline-block w-[2px] h-[14px] bg-[#4F8EF7] ml-[2px] align-middle animate-pulse-glow"></span>
-                    )}
-                  </p>
-                  {phase === 'done' && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="flex items-center gap-2 mt-2"
-                    >
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                      <span className="text-[#10B981]/60 text-[12px] font-medium">Inserted to Studio</span>
-                    </motion.div>
+              <div className="flex items-center gap-3">
+                <div className="flex-1 min-h-[24px] flex items-center">
+                  {displayText ? (
+                    <span className="text-white/60 text-[15px] font-normal">
+                      {displayText}
+                      <span className="inline-block w-[2px] h-[16px] bg-[#4F8EF7] ml-[1px] align-middle animate-pulse-glow"></span>
+                    </span>
+                  ) : (
+                    <span className="text-white/15 text-[15px]">
+                      Describe what you want to build...
+                      <span className="inline-block w-[2px] h-[16px] bg-[#4F8EF7] ml-[1px] align-middle animate-pulse-glow"></span>
+                    </span>
                   )}
                 </div>
+                <button className={`shrink-0 w-[32px] h-[32px] rounded-lg flex items-center justify-center transition-all duration-200 ${displayText ? 'bg-[#4F8EF7]' : 'bg-white/[0.06]'}`}>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M7 12V2M7 2L3 6M7 2L11 6" stroke={displayText ? 'white' : 'rgba(255,255,255,0.2)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
               </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key={`chat-${currentPrompt}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="px-5 py-4 space-y-4"
+            >
+              <div className="flex justify-end">
+                <div className="bg-[#4F8EF7]/10 border border-[#4F8EF7]/15 rounded-2xl rounded-br-md px-4 py-2.5 max-w-[85%]">
+                  <p className="text-white/70 text-[14px] leading-relaxed">{prompts[currentPrompt]}</p>
+                </div>
+              </div>
+
+              {(phase === 'responding' || phase === 'done') && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-start gap-3"
+                >
+                  <div className="w-[22px] h-[22px] rounded-md bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center shrink-0 mt-0.5">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M5 1V9M1 5H9" stroke="white" strokeWidth="1.2" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-white/50 text-[14px] leading-relaxed">
+                      {responseText}
+                      {phase === 'responding' && (
+                        <span className="inline-block w-[2px] h-[14px] bg-[#4F8EF7] ml-[2px] align-middle animate-pulse-glow"></span>
+                      )}
+                    </p>
+                    {phase === 'done' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-2 mt-2.5"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span className="text-[#10B981]/60 text-[12px] font-medium">Inserted to Studio</span>
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+
+              {phase === 'sent' && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex items-center gap-2 pl-1"
+                >
+                  <div className="flex gap-1">
+                    <div className="w-[5px] h-[5px] rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-[5px] h-[5px] rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-[5px] h-[5px] rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  </div>
+                </motion.div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
-
-        <div className="px-5 py-4">
-          <div className="flex items-center gap-3">
-            <div className="flex-1 min-h-[24px] flex items-center">
-              <span className="text-white/60 text-[15px] font-normal">
-                {displayText}
-                {phase === 'typing' && (
-                  <span className="inline-block w-[2px] h-[16px] bg-[#4F8EF7] ml-[1px] align-middle animate-pulse-glow"></span>
-                )}
-              </span>
-              {!displayText && phase === 'typing' && (
-                <span className="text-white/15 text-[15px]">
-                  Describe what you want to build...
-                  <span className="inline-block w-[2px] h-[16px] bg-[#4F8EF7] ml-[1px] align-middle animate-pulse-glow"></span>
-                </span>
-              )}
-            </div>
-            <button className={`shrink-0 w-[32px] h-[32px] rounded-lg flex items-center justify-center transition-all duration-200 ${displayText ? 'bg-[#4F8EF7] hover:bg-[#3D7BE5]' : 'bg-white/[0.06]'}`}>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M7 12V2M7 2L3 6M7 2L11 6" stroke={displayText ? 'white' : 'rgba(255,255,255,0.2)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
       </div>
     </motion.div>
   );
