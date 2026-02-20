@@ -12,6 +12,17 @@ function waitlistApi(): Plugin {
     configureServer(server) {
       pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
       server.middlewares.use('/api/waitlist', async (req, res) => {
+        if (req.method === 'GET') {
+          try {
+            const result = await pool.query('SELECT COUNT(*) FROM waitlist');
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ count: parseInt(result.rows[0].count, 10) }));
+          } catch {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ count: 0 }));
+          }
+          return;
+        }
         if (req.method !== 'POST') {
           res.statusCode = 405;
           res.end(JSON.stringify({ error: 'Method not allowed' }));

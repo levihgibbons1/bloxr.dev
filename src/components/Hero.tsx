@@ -1,65 +1,6 @@
 import { motion } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
-
-const Navbar = () => {
-  const [visible, setVisible] = useState(true);
-  const [atTop, setAtTop] = useState(true);
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      const isAtTop = currentY < 40;
-
-      setAtTop(isAtTop);
-
-      if (isAtTop) {
-        setVisible(true);
-      } else if (currentY > lastScrollY.current + 5) {
-        setVisible(false);
-      } else if (currentY < lastScrollY.current - 5) {
-        setVisible(true);
-      }
-
-      lastScrollY.current = currentY;
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <motion.nav
-      initial={{ y: 0 }}
-      animate={{ y: visible ? 0 : -100 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 md:px-[80px] md:py-5 w-full transition-all duration-300 ${!atTop ? 'bg-black/80 backdrop-blur-xl border-b border-white/5' : ''}`}
-    >
-      <a href="#" className="flex items-center">
-        <span className="text-white text-[28px] font-bold tracking-tight">Bloxr</span>
-        <span className="text-[#4F8EF7] text-[28px] font-bold">.dev</span>
-      </a>
-
-      <div className="hidden md:flex items-center space-x-[40px]">
-        {[
-          { label: 'How It Works', href: '#how-it-works' },
-          { label: 'Features', href: '#features' },
-          { label: 'Pricing', href: '#pricing' },
-        ].map((item) => (
-          <a key={item.label} href={item.href} className="text-white/50 hover:text-white text-[15px] font-medium transition-colors duration-200">
-            {item.label}
-          </a>
-        ))}
-      </div>
-
-      <a href="/waitlist" className="group relative rounded-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#4F8EF7] to-[#7B61FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="relative border border-white/20 group-hover:border-transparent rounded-full px-[28px] py-[10px] transition-colors duration-300">
-          <span className="text-white text-[15px] font-medium">Join Waitlist</span>
-        </div>
-      </a>
-    </motion.nav>
-  );
-};
+import Navbar from './Navbar';
 
 const TypingPrompt = () => {
   const prompts = [
@@ -230,7 +171,7 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.45 }}
           className="mt-5 text-[14px] text-white/25 tracking-wide"
         >
-          Free to start  /  No credit card  /  Works with Roblox Studio
+          Free forever  /  Pro plans for power users  /  No credit card to start
         </motion.p>
 
         <TypingPrompt />
