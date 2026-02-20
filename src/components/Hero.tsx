@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
 
 const Navbar = () => {
@@ -67,18 +67,12 @@ const TypingPrompt = () => {
     "Make enemies patrol and chase players within 20 studs",
     "Create a stamina bar that drains when sprinting",
     "Add a top 10 kills leaderboard with live updates",
+    "Build a trading system between two players",
+    "Create an obby checkpoint system with respawning",
   ];
   const [currentPrompt, setCurrentPrompt] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [phase, setPhase] = useState<'typing' | 'sent' | 'responding' | 'done' | 'clearing'>('typing');
-  const [responseText, setResponseText] = useState('');
-
-  const responses = [
-    "Creating shop GUI, server handler, coin DataStore, and purchase validation...",
-    "Building NPC AI with PathfindingService, aggro range detection, and patrol waypoints...",
-    "Setting up LocalScript with TweenService animations and server-synced stamina system...",
-    "Configuring OrderedDataStore leaderboard with live update polling...",
-  ];
+  const [phase, setPhase] = useState<'typing' | 'pausing' | 'clearing'>('typing');
 
   useEffect(() => {
     const prompt = prompts[currentPrompt];
@@ -87,175 +81,67 @@ const TypingPrompt = () => {
       if (displayText.length < prompt.length) {
         const timeout = setTimeout(() => {
           setDisplayText(prompt.slice(0, displayText.length + 1));
-        }, 30 + Math.random() * 20);
+        }, 35 + Math.random() * 25);
         return () => clearTimeout(timeout);
       } else {
-        const timeout = setTimeout(() => setPhase('sent'), 600);
+        const timeout = setTimeout(() => setPhase('pausing'), 2400);
         return () => clearTimeout(timeout);
       }
     }
 
-    if (phase === 'sent') {
-      const timeout = setTimeout(() => {
-        setResponseText('');
-        setPhase('responding');
-      }, 500);
-      return () => clearTimeout(timeout);
-    }
-
-    if (phase === 'responding') {
-      const response = responses[currentPrompt];
-      if (responseText.length < response.length) {
-        const timeout = setTimeout(() => {
-          setResponseText(response.slice(0, responseText.length + 1));
-        }, 15 + Math.random() * 10);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => setPhase('done'), 1800);
-        return () => clearTimeout(timeout);
-      }
-    }
-
-    if (phase === 'done') {
-      const timeout = setTimeout(() => setPhase('clearing'), 400);
+    if (phase === 'pausing') {
+      const timeout = setTimeout(() => setPhase('clearing'), 100);
       return () => clearTimeout(timeout);
     }
 
     if (phase === 'clearing') {
       const timeout = setTimeout(() => {
         setDisplayText('');
-        setResponseText('');
         setCurrentPrompt((prev) => (prev + 1) % prompts.length);
         setPhase('typing');
-      }, 400);
+      }, 300);
       return () => clearTimeout(timeout);
     }
-  }, [displayText, phase, currentPrompt, responseText]);
-
-  const showChat = phase !== 'typing' && phase !== 'clearing';
+  }, [displayText, phase, currentPrompt]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.5 }}
-      className="mt-14 w-full max-w-[640px]"
+      className="mt-14 w-full max-w-[600px]"
     >
       <div className="relative rounded-2xl border border-white/[0.08] bg-[#0A0A0F]/90 backdrop-blur-xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#4F8EF7]/20 to-transparent"></div>
 
-        <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.05]">
-          <div className="flex items-center gap-2">
-            <div className="w-[20px] h-[20px] rounded-full bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center">
+        <div className="px-5 py-4">
+          <div className="flex items-center gap-3">
+            <div className="w-[20px] h-[20px] rounded-full bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center shrink-0">
               <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
                 <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="white"/>
               </svg>
             </div>
-            <span className="text-white/60 text-[13px] font-semibold">Bloxr Agent</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-[5px] h-[5px] rounded-full bg-[#10B981] shadow-[0_0_6px_rgba(16,185,129,0.5)]"></div>
-            <span className="text-white/30 text-[11px] font-medium">Connected</span>
+            <div className="flex-1 min-h-[24px] flex items-center">
+              <span className={`text-[15px] font-normal transition-opacity duration-300 ${phase === 'clearing' ? 'opacity-0' : 'opacity-100'}`}>
+                {displayText ? (
+                  <span className="text-white/60">
+                    {displayText}
+                    <span className="inline-block w-[2px] h-[16px] bg-[#4F8EF7] ml-[1px] align-middle animate-pulse-glow"></span>
+                  </span>
+                ) : (
+                  <span className="text-white/15">
+                    Describe what you want to build...
+                  </span>
+                )}
+              </span>
+            </div>
+            <button className={`shrink-0 w-[32px] h-[32px] rounded-lg flex items-center justify-center transition-all duration-200 ${displayText ? 'bg-[#4F8EF7]' : 'bg-white/[0.06]'}`}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 12V2M7 2L3 6M7 2L11 6" stroke={displayText ? 'white' : 'rgba(255,255,255,0.2)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </div>
         </div>
-
-        <AnimatePresence mode="wait">
-          {!showChat ? (
-            <motion.div
-              key="input"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="px-5 py-4"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex-1 min-h-[24px] flex items-center">
-                  {displayText ? (
-                    <span className="text-white/60 text-[15px] font-normal">
-                      {displayText}
-                      <span className="inline-block w-[2px] h-[16px] bg-[#4F8EF7] ml-[1px] align-middle animate-pulse-glow"></span>
-                    </span>
-                  ) : (
-                    <span className="text-white/15 text-[15px]">
-                      Describe what you want to build...
-                      <span className="inline-block w-[2px] h-[16px] bg-[#4F8EF7] ml-[1px] align-middle animate-pulse-glow"></span>
-                    </span>
-                  )}
-                </div>
-                <button className={`shrink-0 w-[32px] h-[32px] rounded-lg flex items-center justify-center transition-all duration-200 ${displayText ? 'bg-[#4F8EF7]' : 'bg-white/[0.06]'}`}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M7 12V2M7 2L3 6M7 2L11 6" stroke={displayText ? 'white' : 'rgba(255,255,255,0.2)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={`chat-${currentPrompt}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="px-5 py-4 space-y-4"
-            >
-              <div className="flex justify-end">
-                <div className="bg-[#4F8EF7]/10 border border-[#4F8EF7]/15 rounded-2xl rounded-br-md px-4 py-2.5 max-w-[85%]">
-                  <p className="text-white/70 text-[14px] leading-relaxed">{prompts[currentPrompt]}</p>
-                </div>
-              </div>
-
-              {(phase === 'responding' || phase === 'done') && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex items-start gap-3"
-                >
-                  <div className="w-[22px] h-[22px] rounded-full bg-gradient-to-br from-[#4F8EF7] to-[#7B61FF] flex items-center justify-center shrink-0 mt-0.5">
-                    <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 2L9.5 6.5L14 8L9.5 9.5L8 14L6.5 9.5L2 8L6.5 6.5L8 2Z" fill="white"/>
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-white/50 text-[14px] leading-relaxed">
-                      {responseText}
-                      {phase === 'responding' && (
-                        <span className="inline-block w-[2px] h-[14px] bg-[#4F8EF7] ml-[2px] align-middle animate-pulse-glow"></span>
-                      )}
-                    </p>
-                    {phase === 'done' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-2 mt-2.5"
-                      >
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span className="text-[#10B981]/60 text-[12px] font-medium">Inserted to Studio</span>
-                      </motion.div>
-                    )}
-                  </div>
-                </motion.div>
-              )}
-
-              {phase === 'sent' && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex items-center gap-2 pl-1"
-                >
-                  <div className="flex gap-1">
-                    <div className="w-[5px] h-[5px] rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-[5px] h-[5px] rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-[5px] h-[5px] rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                  </div>
-                </motion.div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </motion.div>
   );
