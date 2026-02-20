@@ -72,7 +72,7 @@ const TypingPrompt = () => {
   ];
   const [currentPrompt, setCurrentPrompt] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [phase, setPhase] = useState<'typing' | 'pausing' | 'clearing'>('typing');
+  const [phase, setPhase] = useState<'typing' | 'pausing' | 'deleting'>('typing');
 
   useEffect(() => {
     const prompt = prompts[currentPrompt];
@@ -84,23 +84,21 @@ const TypingPrompt = () => {
         }, 35 + Math.random() * 25);
         return () => clearTimeout(timeout);
       } else {
-        const timeout = setTimeout(() => setPhase('pausing'), 2400);
+        const timeout = setTimeout(() => setPhase('deleting'), 2400);
         return () => clearTimeout(timeout);
       }
     }
 
-    if (phase === 'pausing') {
-      const timeout = setTimeout(() => setPhase('clearing'), 100);
-      return () => clearTimeout(timeout);
-    }
-
-    if (phase === 'clearing') {
-      const timeout = setTimeout(() => {
-        setDisplayText('');
+    if (phase === 'deleting') {
+      if (displayText.length > 0) {
+        const timeout = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 15);
+        return () => clearTimeout(timeout);
+      } else {
         setCurrentPrompt((prev) => (prev + 1) % prompts.length);
         setPhase('typing');
-      }, 300);
-      return () => clearTimeout(timeout);
+      }
     }
   }, [displayText, phase, currentPrompt]);
 
@@ -122,7 +120,7 @@ const TypingPrompt = () => {
               </svg>
             </div>
             <div className="flex-1 min-h-[24px] flex items-center">
-              <span className={`text-[15px] font-normal transition-opacity duration-300 ${phase === 'clearing' ? 'opacity-0' : 'opacity-100'}`}>
+              <span className="text-[15px] font-normal">
                 {displayText ? (
                   <span className="text-white/60">
                     {displayText}
