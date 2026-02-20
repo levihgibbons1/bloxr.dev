@@ -51,11 +51,8 @@ const Navbar = () => {
         ))}
       </div>
 
-      <a href="/waitlist" className="group relative rounded-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#4F8EF7] to-[#7B61FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="relative border border-white/20 group-hover:border-transparent rounded-full px-[28px] py-[10px] transition-colors duration-300">
-          <span className="text-white text-[15px] font-medium">Join Waitlist</span>
-        </div>
+      <a href="/waitlist" className="rounded-full border border-white/20 hover:bg-white hover:border-white px-[28px] py-[10px] transition-all duration-300">
+        <span className="text-white group-hover:text-black text-[15px] font-medium hover:text-black">Join Waitlist</span>
       </a>
     </motion.nav>
   );
