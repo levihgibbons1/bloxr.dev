@@ -10,9 +10,14 @@ const Navbar = () => {
       </div>
 
       <div className="hidden md:flex items-center space-x-[44px]">
-        {['How It Works', 'Features', 'Marketplace', 'Pricing'].map((item) => (
-          <a key={item} href="#" className="text-white/80 hover:text-white text-[18px] font-medium transition-colors">
-            {item}
+        {[
+          { label: 'How It Works', href: '#how-it-works' },
+          { label: 'Features', href: '#features' },
+          { label: 'Marketplace', href: '#marketplace' },
+          { label: 'Pricing', href: '#pricing' },
+        ].map((item) => (
+          <a key={item.label} href={item.href} className="text-white/80 hover:text-white text-[18px] font-medium transition-colors">
+            {item.label}
           </a>
         ))}
       </div>

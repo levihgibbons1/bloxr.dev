@@ -4,7 +4,13 @@
   --font-sans: "General Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-html, body {
+html {
+  background-color: #000;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+body {
   background-color: #000;
   margin: 0;
 }
