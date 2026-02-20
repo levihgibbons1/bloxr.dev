@@ -51,7 +51,7 @@ const Navbar = () => {
         ))}
       </div>
 
-      <a href="#pricing" className="group relative rounded-full overflow-hidden">
+      <a href="/waitlist" className="group relative rounded-full overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#4F8EF7] to-[#7B61FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div className="relative border border-white/20 group-hover:border-transparent rounded-full px-[28px] py-[10px] transition-colors duration-300">
           <span className="text-white text-[15px] font-medium">Join Waitlist</span>
@@ -213,9 +213,9 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.35 }}
           className="mt-10 flex flex-col sm:flex-row items-center gap-4"
         >
-          <button className="group relative bg-white rounded-full px-[36px] py-[14px] transition-all duration-200 hover:shadow-[0_0_30px_rgba(79,142,247,0.15)] active:scale-[0.97]">
+          <a href="/waitlist" className="group relative bg-white rounded-full px-[36px] py-[14px] transition-all duration-200 hover:shadow-[0_0_30px_rgba(79,142,247,0.15)] active:scale-[0.97] inline-block">
             <span className="text-black text-[16px] font-semibold">Get Early Access</span>
-          </button>
+          </a>
           <a href="#how-it-works" className="text-white/40 hover:text-white/70 text-[15px] font-medium transition-colors flex items-center gap-2">
             See how it works
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mt-[1px]">

@@ -22,9 +22,9 @@ const CTA = () => {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="group relative bg-white rounded-full px-[36px] py-[14px] transition-all duration-200 hover:shadow-[0_0_40px_rgba(79,142,247,0.2)] active:scale-[0.97]">
+            <a href="/waitlist" className="group relative bg-white rounded-full px-[36px] py-[14px] transition-all duration-200 hover:shadow-[0_0_40px_rgba(79,142,247,0.2)] active:scale-[0.97] inline-block">
               <span className="text-black text-[16px] font-semibold">Get Early Access</span>
-            </button>
+            </a>
             <span className="text-white/25 text-[14px]">Free to start. No credit card.</span>
           </div>
         </motion.div>

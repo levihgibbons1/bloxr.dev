@@ -1,13 +1,16 @@
 # Bloxr.dev
 
 ## Overview
-AI-powered Roblox development platform landing page. A React + Vite + Tailwind CSS frontend-only application with custom animations and PRD-accurate content.
+AI-powered Roblox development platform landing page with waitlist email collection. A React + Vite + Tailwind CSS application with custom animations, PRD-accurate content, and a PostgreSQL-backed waitlist.
 
 ## Project Architecture
 - **Framework**: React 19 with TypeScript
 - **Build Tool**: Vite 6
 - **Styling**: Tailwind CSS v4 with `@tailwindcss/vite` plugin
 - **Animation**: Motion (Framer Motion successor) for scroll-triggered and entrance animations
+- **Routing**: React Router DOM v7 (SPA routing)
+- **Database**: PostgreSQL (Neon-backed) for waitlist emails
+- **API**: Vite plugin-based API endpoint (`/api/waitlist`) for dev; needs Express server for production
 - **Font**: General Sans via Fontshare
 - **Icons**: Custom inline SVGs (no emoji usage)
 
@@ -17,7 +20,7 @@ AI-powered Roblox development platform landing page. A React + Vite + Tailwind C
 ├── index.html          # HTML entry point
 ├── src/
 │   ├── main.tsx        # React entry point
-│   ├── App.tsx         # Root component (section ordering)
+│   ├── App.tsx         # Root component with React Router (/ and /waitlist routes)
 │   ├── index.css       # Global styles, Tailwind, custom animations
 │   └── components/
 │       ├── Hero.tsx        # Landing hero with typing prompt animation, video bg
@@ -27,11 +30,18 @@ AI-powered Roblox development platform landing page. A React + Vite + Tailwind C
 │       ├── Marketplace.tsx # UI component categories with hover effects
 │       ├── Pricing.tsx     # 3 tiers (Free/Pro $12/Studio $29)
 │       ├── CTA.tsx         # Final call-to-action
+│       ├── Waitlist.tsx    # Email waitlist signup page (/waitlist route)
 │       └── Footer.tsx      # Site footer with nav links
-├── vite.config.ts      # Vite config (port 5000, all hosts, excludes .local/.cache)
+├── vite.config.ts      # Vite config (port 5000, all hosts, waitlist API plugin)
 ├── tsconfig.json       # TypeScript configuration
 └── package.json        # Dependencies and scripts
 ```
+
+## Database
+- **Table: waitlist** - Stores email signups
+  - `id` SERIAL PRIMARY KEY
+  - `email` VARCHAR(255) NOT NULL UNIQUE
+  - `created_at` TIMESTAMP DEFAULT NOW()
 
 ## Running
 - Dev server: `npm run dev` (runs on port 5000)
@@ -46,6 +56,9 @@ AI-powered Roblox development platform landing page. A React + Vite + Tailwind C
 - Typing prompt animation in hero cycles through real PRD example prompts
 - Navbar transitions to glass effect on scroll
 - Vite watcher excludes .local/ and .cache/ to prevent reload loops
+- "Get Early Access" and "Join Waitlist" buttons link to /waitlist page
+- Waitlist page shows success confirmation after email submission
 
 ## Deployment
-- Static deployment serving the `dist/` directory
+- Requires backend server for production (Vite plugin API only works in dev mode)
+- For production: needs Express server to handle /api/waitlist + serve static dist/
