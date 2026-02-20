@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
@@ -26,15 +26,6 @@ const Waitlist = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
-  const [count, setCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    fetch('/api/waitlist')
-      .then(r => r.json())
-      .then(d => { if (d.count) setCount(d.count); })
-      .catch(() => {});
-  }, []);
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
@@ -172,23 +163,6 @@ const Waitlist = () => {
             </motion.div>
           ) : (
             <>
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="flex items-center justify-center mb-8"
-              >
-                <div className="flex items-center space-x-3 border border-white/10 rounded-full px-5 py-2.5 bg-white/[0.03] backdrop-blur-sm">
-                  <div className="relative flex items-center justify-center w-2 h-2">
-                    <div className="absolute w-2 h-2 bg-[#10B981] rounded-full"></div>
-                    <div className="absolute w-4 h-4 bg-[#10B981]/20 rounded-full animate-ping"></div>
-                  </div>
-                  <span className="text-white/50 text-[14px] font-medium">
-                    {count ? `${count.toLocaleString()}+ already signed up` : 'Spots filling up'}
-                  </span>
-                </div>
-              </motion.div>
-
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
