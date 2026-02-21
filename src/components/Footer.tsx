@@ -43,11 +43,8 @@ const Footer = () => {
           <div className="md:col-span-2">
             <h4 className="text-white/60 text-[13px] font-semibold tracking-[0.08em] uppercase mb-5">Legal</h4>
             <ul className="space-y-3">
-              {['Terms of Service', 'Privacy Policy', 'Cookie Policy'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-white/30 hover:text-white/60 text-[14px] transition-colors duration-200">{item}</a>
-                </li>
-              ))}
+              <li><a href="/terms" className="text-white/30 hover:text-white/60 text-[14px] transition-colors duration-200">Terms of Service</a></li>
+              <li><a href="/privacy" className="text-white/30 hover:text-white/60 text-[14px] transition-colors duration-200">Privacy Policy</a></li>
             </ul>
           </div>
         </div>
@@ -57,9 +54,8 @@ const Footer = () => {
             {new Date().getFullYear()} Bloxr.dev. All rights reserved.
           </p>
           <div className="flex items-center space-x-6">
-            <a href="#" className="text-white/20 hover:text-white/40 text-[13px] transition-colors duration-200">Terms</a>
-            <a href="#" className="text-white/20 hover:text-white/40 text-[13px] transition-colors duration-200">Privacy</a>
-            <a href="#" className="text-white/20 hover:text-white/40 text-[13px] transition-colors duration-200">Contact</a>
+            <a href="/terms" className="text-white/20 hover:text-white/40 text-[13px] transition-colors duration-200">Terms</a>
+            <a href="/privacy" className="text-white/20 hover:text-white/40 text-[13px] transition-colors duration-200">Privacy</a>
           </div>
         </div>
       </div>

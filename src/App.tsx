@@ -8,6 +8,8 @@ import Pricing from './components/Pricing';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import Waitlist from './components/Waitlist';
+import Terms from './components/Terms';
+import Privacy from './components/Privacy';
 
 function LandingPage() {
   return (
@@ -30,6 +32,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/waitlist" element={<Waitlist />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
       </Routes>
     </BrowserRouter>
   );
